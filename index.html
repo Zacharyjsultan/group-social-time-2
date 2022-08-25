@@ -30,36 +30,41 @@
 
     <main>
         <main>
+            <h2>Chili's Location</h2>
             <form id="chilis-form">
     
                 <label>
-    
-                    <h4>Chilis Location</h4>
-                    <input id="chilis-name" required name="chilis-name" placeholder="Name of Chili's">
-                    <button type="submit" id="add-chilis-button">add chilis</button>
-                </label>
-    
-                <label>
-    
-                    <h5>Upload Chili's Location</h5>
-                     <!--the name will have to correspond with supabase table??? -->
+                    <h5>Upload your Chili's</h5>
+                     <!--Upload static spokane -->
                     <input type="file" name="chilis_url" >
+                  
     
                 </label>
      
                 <div>
                     <img id="chilis-img" alt="chilis location">
-                    <h6>Address: 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
+                 
+                    <h6>Address - 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
+                    <img src="/assets/spokane.jpg" id="spokane-chilis" alt="spokane-chilis">
                 </div>
-            </form>
-            <section>
+
+                <label>
+    
+                    <h4>Chilis Location</h4>
+                    <input id="chilis-name" required name="chilis-name" placeholder="Address of Chili's">
+                    <button type="submit" id="add-chilis-button" >add chilis</button>
+                </label>
+
                 <label>
                     <h3>Rate your Chili's experience??</h3>
                     <textarea name="chilis-rating" id="chilis-rating" cols="35" rows="5"></textarea>
                 </label>
                 <div></div>
-                <button id="add-chilis-comment"> add comment </button>
-            </section>
+                <button id="add-chilis-comment" style="width:180px;height:25px"> add comment </button>
+            </form>
+            <div id="comments-display">
+                comment 1
+            </div>
            
     
     </main>

@@ -24,7 +24,7 @@ body {
 }
 
 .page-header {
-    position: sticky;
+    position: static;
     top: 0;
     padding: 0 10px;
     display: flex;
@@ -66,6 +66,10 @@ footer {
     display: flex;
     justify-content: flex-end;
     background-color: var(--footer-background);
+    box-shadow: box-shadow -7px 5px 12px 0px rgba(0,0,0,0.34);
+    -webkit-box-shadow: -7px 5px 12px 0px rgba(0,0,0,0.34);
+    -moz-box-shadow: -7px 5px 12px 0px rgba(0,0,0,0.34);
+}
 }
 
 img.logo {
@@ -97,4 +101,47 @@ section {
 
 h3 {
     color: white;
+    text-decoration: underline;
 }
+
+h2 {
+    color: white;
+    text-decoration: underline;
+}
+
+img#spokane-chilis {
+    width: 260px;
+    height: 200px;
+    border: 4px black solid;
+
+}
+
+h6 {
+    text-decoration: underline;
+    
+}
+h5 {
+    color: black;
+    text-decoration: underline;
+}
+h4 {
+    text-decoration: underline;
+    color: black;
+}
+
+button#add-chilis-comment {
+    cursor: pointer;
+    text-align: center;
+    margin-left: 580px;
+   
+}
+
+button#add-chilis-button {
+    cursor: pointer;
+    
+}
+
+input#file-upload-button {
+    cursor: pointer;
+}
+
