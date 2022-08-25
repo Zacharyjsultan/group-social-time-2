@@ -1,7 +1,7 @@
 // import { client, SUPABASE_URL } from "./client.js";
 
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://fjidvhxajekcfrrjsnla.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqaWR2aHhhamVrY2ZycmpzbmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAxNDU2ODYsImV4cCI6MTk3NTcyMTY4Nn0._zi_gZoOt0ksKYa3J9htU9w6oH8ojf_WkKrLHWGaswo';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -61,8 +61,8 @@ export async function uploadChilisPhoto(photoName, photoPath) {
         console.log(error);
         return null;
     }
-    const url = `${SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
-
+    const url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
+    
     return url;
 }
 

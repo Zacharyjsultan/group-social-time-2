@@ -1,9 +1,11 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser, uploadPhoto } from './fetch-utils.js';
+import { addComment, checkAuth, signOutUser, uploadPhoto } from './fetch-utils.js';
 
 // pure rendering (data --> DOM):
+/// will need to make render comments function 
 import { renderPhotoContainer } from 'render-utils.js'; 
+import { renderComments } from './render-utils.js';
 /*  "boiler plate" auth code */
 // checking if we have a user! (will redirect to auth if not):
 checkAuth();
@@ -51,4 +53,37 @@ chilisForm.addEventListener('submit', async (e) => {
     fileInput.value = '';
         
     return displayPhoto;
+});
+
+const commentsContainer = document.getElementById('comment-container');
+
+/// display comments - finish..
+function displayComments(){
+    commentsContainer.innerHTML = '';
+    
+    const ul = renderComments(comments);
+    commentsContainer.append(ul);
+}
+///////////
+displayComments();
+///////////////
+const addCommentEl = document.getElementById('add-comment')
+;
+// eventistener 
+
+addCommentEl.addEventListener('click', async (e) =>{
+    e.preventDefault();
+
+    const FormData = new FormData(addCommentEl);
+
+    const response = await addComment({
+        text: FormData.get('text'),
+        
+
+    });
+
+    const comment = response.data;
+    comments.push(comment);
+
+    displayComments();
 });

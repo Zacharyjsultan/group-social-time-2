@@ -13,3 +13,13 @@ export function renderPhotoContainer(photo) {
     container.append(photoName, photoPath);
     return container;
 }
+export function renderComments(comments) {
+    const ul = document.createElement('ul');
+
+    for (const comment of comments) {
+        const li = document.createElement('li');
+        li.textContent = comment.textContent;
+        ul.append(li);
+    }
+    return ul;
+}
