@@ -101,6 +101,7 @@ section {
 
 h3 {
     color: white;
+
     text-decoration: underline;
 }
 
@@ -143,5 +144,13 @@ button#add-chilis-button {
 
 input#file-upload-button {
     cursor: pointer;
+
+}
+
+#preview {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+
 }
 
