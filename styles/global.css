@@ -20,6 +20,7 @@ body {
     background: var(--background);
     display: grid;
     grid-template-rows: auto 1fr auto;
+    background-color: green;
 }
 
 .page-header {
@@ -30,6 +31,11 @@ body {
     align-items: center;
     background-color: var(--header-background);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+header.page-header {
+    margin: 8px;
+    padding: 5px;
 }
 
 .page-header .title {
@@ -48,10 +54,12 @@ main {
     padding: 20px;
     background: rgb(5,149,5);
     background: linear-gradient(90deg, rgba(5,149,5,1) 0%, rgba(189,17,17,1) 28%, rgba(255,0,0,1) 100%);
+    text-align: center;
+    
 }
 
 footer {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     padding: 7px 20px;
     font-size: 0.8em;
@@ -65,3 +73,28 @@ img.logo {
     height: 155px;
 }
 
+form#chilis-form {
+    
+    margin: 10px;
+    padding: 20px;
+    border: 4px black;
+    border-style: inset;
+    display: grid;
+    color: white;
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(189,17,17,1) 70%, rgba(5,149,5,1) 100%);
+    
+    box-shadow: box-shadow -7px 5px 12px 0px rgba(0,0,0,0.34);
+    -webkit-box-shadow: -7px 5px 12px 0px rgba(0,0,0,0.34);
+    -moz-box-shadow: -7px 5px 12px 0px rgba(0,0,0,0.34);
+}
+
+section {
+    border: 3px black;
+    border-style: dashed;
+
+}
+
+h3 {
+    color: white;
+}

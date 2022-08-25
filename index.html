@@ -18,10 +18,13 @@
 
 <body>
     <header class="page-header">
-        <img class="logo" src="/assets/html_css_js.png">
-        <p class="title">Supabase Web App</p>
+        <img class="logo" src="/assets/chilislogo.jpg">
+        <span> 🌶️ </span>
+        <p class="title">Chili's Restaurant Rater: 'Get In My Belly' </p>
+        <span> 🌶️ </span>
+        <img class="logo" src="/assets/chilislogo.jpg">
         <nav>
-            <a id="sign-out-link" href="auth">Sign Out</a>
+            <a id="sign-out-link" href="index.html">🌶️Sign Out🌶️</a>
         </nav>
     </header>
 
@@ -33,7 +36,7 @@
     
                     <h4>Chilis Location</h4>
                     <input id="chilis-name" required name="chilis-name" placeholder="Name of Chili's">
-    
+                    <button type="submit" id="add-chilis-button">add chilis</button>
                 </label>
     
                 <label>
@@ -48,18 +51,20 @@
                     <img id="chilis-img" alt="chilis location">
                     <h6>Address: 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
                 </div>
-    
+            </form>
+            <section>
                 <label>
                     <h3>Rate your Chili's experience??</h3>
-                    <textarea name="chilis-rating" id="chilis-rating" cols="30" rows="10"></textarea>
+                    <textarea name="chilis-rating" id="chilis-rating" cols="35" rows="5"></textarea>
                 </label>
                 <div></div>
                 <button id="add-chilis-comment"> add comment </button>
-            </form>
+            </section>
+           
     
     </main>
 
-    <footer>&copy;2022 Alchemy Software Developer</footer>
+    <footer>&copy;2022 Chili's Consumers Association of America</footer>
 
     <script type="module" src="app.js"></script>
 </body>
