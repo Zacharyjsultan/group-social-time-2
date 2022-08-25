@@ -26,7 +26,37 @@
     </header>
 
     <main>
-
+        <main>
+            <form id="chilis-form">
+    
+                <label>
+    
+                    <h4>Chilis Location</h4>
+                    <input id="chilis-name" required name="chilis-name" placeholder="Name of Chili's">
+    
+                </label>
+    
+                <label>
+    
+                    <h5>Upload Chili's Location</h5>
+                     <!--the name will have to correspond with supabase table??? -->
+                    <input type="file" name="chilis_url" >
+    
+                </label>
+     
+                <div>
+                    <img id="chilis-img" alt="chilis location">
+                    <h6>Address: 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
+                </div>
+    
+                <label>
+                    <h3>Rate your Chili's experience??</h3>
+                    <textarea name="chilis-rating" id="chilis-rating" cols="30" rows="10"></textarea>
+                </label>
+                <div></div>
+                <button id="add-chilis-comment"> add comment </button>
+            </form>
+    
     </main>
 
     <footer>&copy;2022 Alchemy Software Developer</footer>
