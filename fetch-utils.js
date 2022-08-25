@@ -1,3 +1,5 @@
+// import { client, SUPABASE_URL } from "./client.js";
+
 const SUPABASE_URL = '';
 const SUPABASE_KEY = '';
 
@@ -42,40 +44,44 @@ export async function signOutUser() {
     return await client.auth.signOut();
 }
 
+function checkError({ data, error }) {
+    //  eslint-disable-next-line
+    return error ? console.error(error) : data;
+}
 /* Data functions */
 
-export async function getChilis() {
-    return await client.from('chilis').select();
-}
-
-export async function uploadChilisPic(imageName, imageFile) {
-    const bucket = client.storage.from('pics');
-    const { data, error } = await bucket.upload(
-        imageName,
-        imageFile,
-        {
+export async function uploadChilisPhoto(photoName, photoPath) {
+    const bucket = client.storage.from('photos');
+    const response = await bucket
+        .upload(photoName, photoPath, {
             cacheControl: '3600',
             upsert: true,
-        }
-    );
+        }); 
     if (error) {
         console.log(error);
         return null;
     }
     const url = `${SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
+
     return url;
 }
 
-export function getPostImageUrl(imageName) {
-    return `${SUPABASE_URL}/storage/v1/object/public/${imageName}`
+export async function getChilisPhoto(id) {
+    const response = await client
+        .from('photos')
+        .select()
+        .match(id)
+        .single();
+        
+    return checkError(response);
 }
 
 export async function createChilis(chilis) {
-    return await client.from('chilis').insert(chilis);
-}
-
-export async function deleteChilis(id) {
-    return await client.from('chilis').delete().match({ id });
+    const response = await client
+        .from('photos')
+        .insert(chilis);
+    
+    return checkError(response);
 }
 
 export async function addComment(comment) {
@@ -89,14 +95,11 @@ export function onComment(postId, handleNewComment) {
         .subscribe();
 }
 
-export async function updateChilis(chilis) {
-    return await client.from('chilis').upsert(chilis).single();
-}
-
-export async function getChilisId(id) {
-    const response = await client
-        .from('chilis')
-        .select()
-        .match({ id });
-    return await response;
+export async function subscribe() {
+    const mySubscription = supabase
+        .from('*')
+        .on('*', (payload) => {
+            console.log('Change received!', payload);
+        })
+        .subscribe();
 }
