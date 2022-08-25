@@ -1,3 +1,5 @@
+// import { client, SUPABASE_URL } from "./client.js";
+
 const SUPABASE_URL = '';
 const SUPABASE_KEY = '';
 
@@ -42,4 +44,62 @@ export async function signOutUser() {
     return await client.auth.signOut();
 }
 
+function checkError({ data, error }) {
+    //  eslint-disable-next-line
+    return error ? console.error(error) : data;
+}
 /* Data functions */
+
+export async function uploadChilisPhoto(photoName, photoPath) {
+    const bucket = client.storage.from('photos');
+    const response = await bucket
+        .upload(photoName, photoPath, {
+            cacheControl: '3600',
+            upsert: true,
+        }); 
+    if (error) {
+        console.log(error);
+        return null;
+    }
+    const url = `${SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
+
+    return url;
+}
+
+export async function getChilisPhoto(id) {
+    const response = await client
+        .from('photos')
+        .select()
+        .match(id)
+        .single();
+        
+    return checkError(response);
+}
+
+export async function createChilis(chilis) {
+    const response = await client
+        .from('photos')
+        .insert(chilis);
+    
+    return checkError(response);
+}
+
+export async function addComment(comment) {
+    return await client.from('comments').insert(comment).single();
+}
+
+export function onComment(postId, handleNewComment) {
+    client
+        .from(`comments:post_id=eq.${postId}`)
+        .on('INSERT', handleNewComment)
+        .subscribe();
+}
+
+export async function subscribe() {
+    const mySubscription = supabase
+        .from('*')
+        .on('*', (payload) => {
+            console.log('Change received!', payload);
+        })
+        .subscribe();
+}
