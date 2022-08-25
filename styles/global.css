@@ -80,6 +80,7 @@ form#chilis-form {
     border: 4px black;
     border-style: inset;
     display: grid;
+    color: white;
     background: rgb(255,0,0);
     background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(189,17,17,1) 70%, rgba(5,149,5,1) 100%);
     
@@ -91,4 +92,9 @@ form#chilis-form {
 section {
     border: 3px black;
     border-style: dashed;
+
+}
+
+h3 {
+    color: white;
 }
