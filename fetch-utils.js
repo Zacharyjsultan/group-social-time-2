@@ -43,3 +43,60 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+
+export async function getChilis() {
+    return await client.from('chilis').select();
+}
+
+export async function uploadChilisPic(imageName, imageFile) {
+    const bucket = client.storage.from('pics');
+    const { data, error } = await bucket.upload(
+        imageName,
+        imageFile,
+        {
+            cacheControl: '3600',
+            upsert: true,
+        }
+    );
+    if (error) {
+        console.log(error);
+        return null;
+    }
+    const url = `${SUPABASE_URL}/storage/v1/object/public/${data.Key}`;
+    return url;
+}
+
+export function getPostImageUrl(imageName) {
+    return `${SUPABASE_URL}/storage/v1/object/public/${imageName}`
+}
+
+export async function createChilis(chilis) {
+    return await client.from('chilis').insert(chilis);
+}
+
+export async function deleteChilis(id) {
+    return await client.from('chilis').delete().match({ id });
+}
+
+export async function addComment(comment) {
+    return await client.from('comments').insert(comment).single();
+}
+
+export function onComment(postId, handleNewComment) {
+    client
+        .from(`comments:post_id=eq.${postId}`)
+        .on('INSERT', handleNewComment)
+        .subscribe();
+}
+
+export async function updateChilis(chilis) {
+    return await client.from('chilis').upsert(chilis).single();
+}
+
+export async function getChilisId(id) {
+    const response = await client
+        .from('chilis')
+        .select()
+        .match({ id });
+    return await response;
+}
