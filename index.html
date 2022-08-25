@@ -29,39 +29,32 @@
     </header>
 
     <main>
-        <main>
-            <form id="chilis-form">
-    
-                <label>
-    
-                    <h4>Chilis Location</h4>
-                    <input id="chilis-name" required name="chilis-name" placeholder="Name of Chili's">
-                    <button type="submit" id="add-chilis-button">add chilis</button>
-                </label>
-    
-                <label>
-    
-                    <h5>Upload Chili's Location</h5>
-                     <!--the name will have to correspond with supabase table??? -->
-                    <input type="file" name="chilis_url" >
-    
-                </label>
-     
-                <div>
-                    <img id="chilis-img" alt="chilis location">
-                    <h6>Address: 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
-                </div>
-            </form>
-            <section>
-                <label>
-                    <h3>Rate your Chili's experience??</h3>
-                    <textarea name="chilis-rating" id="chilis-rating" cols="35" rows="5"></textarea>
-                </label>
-                <div></div>
-                <button id="add-chilis-comment"> add comment </button>
-            </section>
-           
-    
+        <section id="image-section">
+        <form id="chilis-form">
+            <label for="chilis-name">
+                <div id="title">Upload Your Chilis!</div>
+                <p id="display-photo"></p>
+                <img src="" id="preview" alt="image-preview">
+                <input type="file" name="photo_url" placeholder="upload a picture of your favorite chilis" id="file-input">
+                <button id="post-photo-button">display</button>
+            </label>
+
+            <label>
+                <div>Upload Chili's Photo</div>
+                    <!--the name will have to correspond with supabase table??? -->
+                    <input id="chilis-name" required placeholder="Enter the address of your favorite Chili's!" name="chilis-name">
+                    <button type="submit" id="add-chilis-button">address</button>
+                    <p id="adress-container"></p>
+            </label>
+        </section>
+            <label for="comment-container">
+                <div>Comments</div>
+                <textarea name="comments" id="comments-textarea" placeholder="Enter comments here" cols="30" rows="4"></textarea>
+                <button id="add-comment">post</button>
+            </label>
+
+            <p class="error"></p>
+        </form>
     </main>
 
     <footer>&copy;2022 Chili's Consumers Association of America</footer>

@@ -1,8 +1,9 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser } from './fetch-utils.js';
-// pure rendering (data --> DOM):
+import { checkAuth, signOutUser, uploadPhoto } from './fetch-utils.js';
 
+// pure rendering (data --> DOM):
+import { renderPhotoContainer } from 'render-utils.js'; 
 /*  "boiler plate" auth code */
 // checking if we have a user! (will redirect to auth if not):
 checkAuth();
@@ -15,9 +16,39 @@ signOutLink.addEventListener('click', signOutUser);
 /* end "boiler plate auth code" */
 
 // grab needed DOM elements on page:
+const preview = document.querySelector('img');
+const chilisForm = document.getElementById('chilis-form');
+const displayPhoto = document.getElementById('display-photo');
+const fileInput = document.querySelector('input[type=file]');
 
 // local state:
 
 // display functions:
 
 // events:
+
+fileInput.addEventListener('change', () => {
+    const [file] = fileInput.files;
+    preview.src = URL.createObjectURL(file);
+});
+
+
+
+chilisForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(chilisForm);
+    const picture = data.get('file-input');
+    const photo = {
+        photoName: 'name',
+        photoPath: picture,
+    };
+
+    await uploadPhoto(photo.photoName, photo.photoPath);
+        
+    const newContainer = renderPhotoContainer(photo);
+    displayPhoto.append(newContainer);
+        
+    fileInput.value = '';
+        
+    return displayPhoto;
+});
