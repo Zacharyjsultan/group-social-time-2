@@ -36,25 +36,24 @@
     
                 <label>
                     <h5>Upload your Chili's</h5>
-                     <!--Upload static spokane -->
-                    <input type="file" name="chilis_url" >
+                     <p id="photo-container"></p>
+                    <input type="file" name="file-input" id="file-input">
+                    <button id="post-photo-button">post</button>
                   
-    
                 </label>
      
                 <div>
-                    <img id="chilis-img" alt="chilis location">
-                 
-                    <h6>Address - 207 W Spokane Falls Blvd, Spokane, WA 99201</h6>
+                    <img id="chilis-img" alt="chilis location" src="">
                     
                 </div>
 
                 <label>
     
                     <h4>Chilis Location</h4>
-                    <input id="chilis-name" required name="chilis-name" placeholder="Address of Chili's">
+                    <input id="chilis-name"  name="chilis-name" placeholder="Address of Chili's">
                     <button type="submit" id="add-chilis-button" >add chilis</button>
                 </label>
+                <div id="name-display"></div>
 
                 <label>
                     <h3>Rate your Chili's experience??</h3>

@@ -1,16 +1,21 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { addComment, checkAuth, signOutUser, uploadPhoto } from './fetch-utils.js';
+import { addComment, checkAuth, signOutUser, uploadChilisPhoto } from './fetch-utils.js';
 
 // pure rendering (data --> DOM):
 /// will need to make render comments function 
-import { renderPhotoContainer } from 'render-utils.js'; 
-import { renderComments } from './render-utils.js';
+import { renderComments, renderPhotoContainer } from './render-utils.js';
 /*  "boiler plate" auth code */
 // checking if we have a user! (will redirect to auth if not):
 checkAuth();
 // can optionally return the user:
-// const user = checkAuth();
+const user = checkAuth();
+const preview = document.querySelector('img');
+const chilisForm = document.getElementById('chilis-form');
+const photoContainer = document.getElementById('photo-container');
+const fileInput = document.querySelector('input[type=file]');
+const postPhotoButton = document.getElementById('post-photo-button');
+
 
 // sign out link:
 const signOutLink = document.getElementById('sign-out-link');
@@ -18,12 +23,8 @@ signOutLink.addEventListener('click', signOutUser);
 /* end "boiler plate auth code" */
 
 // grab needed DOM elements on page:
-const preview = document.querySelector('img');
-const chilisForm = document.getElementById('chilis-form');
-const displayPhoto = document.getElementById('display-photo');
-const fileInput = document.querySelector('input[type=file]');
-
 // local state:
+let comments = [];
 
 // display functions:
 
@@ -35,24 +36,19 @@ fileInput.addEventListener('change', () => {
 });
 
 
-
 chilisForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = new FormData(chilisForm);
-    const picture = data.get('file-input');
-    const photo = {
-        photoName: 'name',
-        photoPath: picture,
-    };
 
-    await uploadPhoto(photo.photoName, photo.photoPath);
-        
-    const newContainer = renderPhotoContainer(photo);
-    displayPhoto.append(newContainer);
-        
-    fileInput.value = '';
-        
-    return displayPhoto;
+    const data = new FormData(chilisForm);
+
+    const photo = data.get('file-input');
+   
+    let url = null;
+    if (photo.size) {
+        const imageName = `${user.id}/${photo.name}`;
+        url = await uploadChilisPhoto(imageName, photo);
+    }
+    
 });
 
 const commentsContainer = document.getElementById('comment-container');
@@ -64,9 +60,9 @@ function displayComments(){
     const ul = renderComments(comments);
     commentsContainer.append(ul);
 }
-///////////
+
 displayComments();
-///////////////
+
 const addCommentEl = document.getElementById('add-comment')
 ;
 // eventistener 
@@ -87,3 +83,17 @@ addCommentEl.addEventListener('click', async (e) =>{
 
     displayComments();
 });
+
+async function displayImage() {
+    // clear the container (.innerHTML = '')
+    photoContainer.innerHTML = '';
+
+    const newUpload = await getChilisPhoto(id);
+   
+    const item = renderPhotoContainer(newUpload);
+       
+    photoContainer.append(item);
+}
+
+
+
