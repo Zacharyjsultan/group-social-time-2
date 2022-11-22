@@ -51,20 +51,22 @@ function checkError({ data, error }) {
 /* Data functions */
 
 export async function uploadChilisPhoto(photoName, photoPath) {
-    const bucket = client.storage.from('photos');
-    const response = await bucket
-        .upload(photoName, photoPath, {
-            cacheControl: '3600',
-            upsert: true,
-        }); 
-    if (error) {
+    try {
+        const bucket = await client.storage.from('photos');
+        const response = await bucket
+            .upload(photoName, photoPath, {
+                cacheControl: '3600',
+                upsert: true,
+            });
+        const url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
+        return url;
+    } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error);
         return null;
     }
-    const url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
-    
-    return url;
 }
+
 
 export async function getChilisPhoto(id) {
     const response = await client
@@ -72,7 +74,7 @@ export async function getChilisPhoto(id) {
         .select()
         .match(id)
         .single();
-        
+
     return checkError(response);
 }
 
@@ -80,7 +82,7 @@ export async function createChilis(chilis) {
     const response = await client
         .from('photos')
         .insert(chilis);
-    
+
     return checkError(response);
 }
 
@@ -96,9 +98,11 @@ export function onComment(postId, handleNewComment) {
 }
 
 export async function subscribe() {
+    //eslint-disable-next-line no-unused-vars
     const mySubscription = supabase
         .from('*')
         .on('*', (payload) => {
+            // eslint-disable-next-line no-console
             console.log('Change received!', payload);
         })
         .subscribe();
