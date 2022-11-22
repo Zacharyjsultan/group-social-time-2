@@ -1,9 +1,10 @@
+//eslint-disable no-unused-vars
 // importing other stuff, utility functions for:
 // working with supabase:
-import { addComment, checkAuth, signOutUser, uploadChilisPhoto } from './fetch-utils.js';
+import { addComment, checkAuth, signOutUser, uploadChilisPhoto, getChilisPhoto } from './fetch-utils.js';
 
 // pure rendering (data --> DOM):
-/// will need to make render comments function 
+/// will need to make render comments function
 import { renderComments, renderPhotoContainer } from './render-utils.js';
 /*  "boiler plate" auth code */
 // checking if we have a user! (will redirect to auth if not):
@@ -12,10 +13,8 @@ checkAuth();
 const user = checkAuth();
 const preview = document.querySelector('img');
 const chilisForm = document.getElementById('chilis-form');
-const photoContainer = document.getElementById('photo-container');
 const fileInput = document.querySelector('input[type=file]');
-const postPhotoButton = document.getElementById('post-photo-button');
-
+const photoContainer = document.getElementById('photo-container');
 
 // sign out link:
 const signOutLink = document.getElementById('sign-out-link');
@@ -42,13 +41,14 @@ chilisForm.addEventListener('submit', async (e) => {
     const data = new FormData(chilisForm);
 
     const photo = data.get('file-input');
-   
+
     let url = null;
     if (photo.size) {
         const imageName = `${user.id}/${photo.name}`;
+        // eslint-disable-next-line no-unused-vars
         url = await uploadChilisPhoto(imageName, photo);
     }
-    
+
 });
 
 const commentsContainer = document.getElementById('comment-container');
@@ -56,7 +56,7 @@ const commentsContainer = document.getElementById('comment-container');
 /// display comments - finish..
 function displayComments(){
     commentsContainer.innerHTML = '';
-    
+
     const ul = renderComments(comments);
     commentsContainer.append(ul);
 }
@@ -65,7 +65,7 @@ displayComments();
 
 const addCommentEl = document.getElementById('add-comment')
 ;
-// eventistener 
+// eventistener
 
 addCommentEl.addEventListener('click', async (e) =>{
     e.preventDefault();
@@ -74,7 +74,7 @@ addCommentEl.addEventListener('click', async (e) =>{
 
     const response = await addComment({
         text: FormData.get('text'),
-        
+
 
     });
 
@@ -88,12 +88,11 @@ async function displayImage() {
     // clear the container (.innerHTML = '')
     photoContainer.innerHTML = '';
 
-    const newUpload = await getChilisPhoto(id);
-   
+    const newUpload = await getChilisPhoto();
+
     const item = renderPhotoContainer(newUpload);
-       
+
     photoContainer.append(item);
 }
 
-
-
+displayImage();
